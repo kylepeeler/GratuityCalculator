@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  GratuityCalculator
 //
-//  Created by Elliott, Rob on 8/30/17.
-//  Copyright © 2017 Elliott, Rob. All rights reserved.
+//  Created by Peeler, Kyle on 8/30/17.
+//  Copyright © 2017 Peeler, Kyle. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,22 @@ class ViewController: UIViewController {
     @IBOutlet var lblTotalAmountOutput: UILabel!
     
     let gratuityCalc = Gratuity(tipPercent: 0.15, billAmount: 0.00)
-
+    
+    //create class level formatters since it is used in multiple methods
+    let decimalFormatter: NumberFormatter = {
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        nf.minimumFractionDigits = 2
+        nf.maximumFractionDigits = 2
+        return nf;
+    }()
+    let percentFormatter: NumberFormatter = {
+        let nf = NumberFormatter()
+        nf.numberStyle = .percent
+        return nf;
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,18 +42,30 @@ class ViewController: UIViewController {
     }
 
     @IBAction func txtBillAmountUpdated(_ sender: Any) {
-        print("Bill Amount updated!")
+        //print("Bill Amount updated!")
+        
+        //Note: we crash when there is not a value because we force unwrap it...
+        let billAmount = (sender as! UITextField).text
+        gratuityCalc.billAmount = NSDecimalNumber(string: billAmount)
+        lblTipAmountOutput.text = decimalFormatter.string(from: gratuityCalc.tipAmount)
+        lblTotalAmountOutput.text = decimalFormatter.string(from: gratuityCalc.totalBillAmount)
     }
 
     
     
     @IBAction func slideTipPercentUpdated(_ sender: Any) {
-        print("Tip Percentage updated!")
+        //print("Tip Percentage updated!")
+        
+        //It's okay to force unwrap it here because there will always get a value
         let tipPercent = (sender as! UISlider).value
         gratuityCalc.tipPercent = NSDecimalNumber(value: tipPercent)
-        print(gratuityCalc.tipPercent)
+        lblTipPercentOutput.text = percentFormatter.string(from: gratuityCalc.tipPercent)
+        lblTipAmountOutput.text = decimalFormatter.string(from: gratuityCalc.tipAmount)
+        lblTotalAmountOutput.text = decimalFormatter.string(from: gratuityCalc.totalBillAmount)
     }
-    
+
+
+
 }
 
 
