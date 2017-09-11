@@ -10,10 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var lblTipPersdfsdfsdfntOutput: UILabel!
+    @IBOutlet var lblTipPercentOutput: UILabel!
     @IBOutlet var lblTipAmountOutput: UILabel!
     @IBOutlet var lblTotalAmountOutput: UILabel!
     
+    let gratuityCalc = Gratuity(tipPercent: 0.15, billAmount: 0.00)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,9 @@ class ViewController: UIViewController {
     
     @IBAction func slideTipPercentUpdated(_ sender: Any) {
         print("Tip Percentage updated!")
+        let tipPercent = (sender as! UISlider).value
+        gratuityCalc.tipPercent = NSDecimalNumber(value: tipPercent)
+        print(gratuityCalc.tipPercent)
     }
     
 }

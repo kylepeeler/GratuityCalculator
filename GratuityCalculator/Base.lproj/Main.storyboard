@@ -61,9 +61,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="decimalPad"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
                                 <connections>
-                                    <action selector="txtBillAmountUpdated:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="RrM-mu-dSP"/>
+                                    <action selector="txtBillAmountUpdated:" destination="BYZ-38-t0r" eventType="editingChanged" id="bG9-gm-VC2"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEk-aI-2ee">
