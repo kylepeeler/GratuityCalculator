@@ -44,18 +44,22 @@ class ViewController: UIViewController {
     @IBAction func txtBillAmountUpdated(_ sender: Any) {
         //print("Bill Amount updated!")
         
-        //Note: we crash when there is not a value because we force unwrap it...
         let billAmount = (sender as! UITextField).text
-        gratuityCalc.billAmount = NSDecimalNumber(string: billAmount)
-        lblTipAmountOutput.text = decimalFormatter.string(from: gratuityCalc.tipAmount)
-        lblTotalAmountOutput.text = decimalFormatter.string(from: gratuityCalc.totalBillAmount)
+        if let text = (sender as! UITextField).text, !text.isEmpty{
+            gratuityCalc.billAmount = NSDecimalNumber(string: billAmount)
+            lblTipAmountOutput.text = decimalFormatter.string(from: gratuityCalc.tipAmount)
+            lblTotalAmountOutput.text = decimalFormatter.string(from: gratuityCalc.totalBillAmount)
+        }else{
+            lblTipAmountOutput.text = "0.00";
+            lblTotalAmountOutput.text = "0.00";
+        }
+        
     }
 
     
     
     @IBAction func slideTipPercentUpdated(_ sender: Any) {
         //print("Tip Percentage updated!")
-        
         //It's okay to force unwrap it here because there will always get a value
         let tipPercent = (sender as! UISlider).value
         gratuityCalc.tipPercent = NSDecimalNumber(value: tipPercent)
