@@ -22,12 +22,13 @@ class ViewController: UIViewController {
         nf.numberStyle = .decimal
         nf.minimumFractionDigits = 2
         nf.maximumFractionDigits = 2
-        return nf;
+        return nf
     }()
+    
     let percentFormatter: NumberFormatter = {
         let nf = NumberFormatter()
         nf.numberStyle = .percent
-        return nf;
+        return nf
     }()
     
     
@@ -61,7 +62,9 @@ class ViewController: UIViewController {
     @IBAction func slideTipPercentUpdated(_ sender: Any) {
         //print("Tip Percentage updated!")
         //It's okay to force unwrap it here because there will always get a value
-        let tipPercent = (sender as! UISlider).value
+        var tipPercent = (sender as! UISlider).value
+        //round the value to two decimal places
+        tipPercent = round(tipPercent * 100.0) / 100.0
         gratuityCalc.tipPercent = NSDecimalNumber(value: tipPercent)
         lblTipPercentOutput.text = percentFormatter.string(from: gratuityCalc.tipPercent)
         lblTipAmountOutput.text = decimalFormatter.string(from: gratuityCalc.tipAmount)
